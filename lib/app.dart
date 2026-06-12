@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         final seedColor = Color(state.themeColor);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Fintracker',
+          title: 'Finanças Start',
           themeMode: brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(
             useMaterial3: true,

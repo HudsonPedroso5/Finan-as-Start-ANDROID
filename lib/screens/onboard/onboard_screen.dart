@@ -47,10 +47,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Fintracker', style: theme.textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700)),
+                  Text('Finanças Start', style: theme.textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: 12),
                   Text(
-                    'Crie o perfil inicial. Os dados ficam apenas na memória desta sessão.',
+                    'Crie o perfil inicial.',
                     style: theme.textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 24),
@@ -83,9 +83,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text('Sem banco de dados'),
+                          Text('Bem-vindo ao Finanças Start!'),
                           SizedBox(height: 8),
-                          Text('Ao fechar o app, os dados de teste são recriados automaticamente.'),
+                          Text('Organize suas finanças, acompanhe suas metas e evolua seus conhecimentos financeiros de forma simples, divertida e eficiente.'),
                         ],
                       ),
                     ),

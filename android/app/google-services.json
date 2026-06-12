@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:384943250407:android:809bb3e5ff8442850f3b42",
         "android_client_info": {
-          "package_name": "com.app.financas"
+          "package_name": "me.nafish.fintracker"
         }
       },
       "oauth_client": [],

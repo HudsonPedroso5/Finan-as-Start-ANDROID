@@ -191,21 +191,21 @@ class SettingsScreen extends StatelessWidget {
               leading: const Icon(Icons.info),
               title: const Text('Sobre'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => showAboutDialog(context: context, applicationName: 'Fintracker'),
+              onTap: () => showAboutDialog(context: context, applicationName: 'Finanças Start'),
             ),
           ),
           const SizedBox(height: 8),
           Card(
             child: ListTile(
               leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
+              title: const Text('Sair'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () async {
                 final confirm = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text('Logout'),
-                    content: const Text('Deseja realmente fazer logout?'),
+                    title: const Text('Sair'),
+                    content: const Text('Deseja realmente sair da conta?'),
                     actions: [
                       TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
                       FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Sair')),

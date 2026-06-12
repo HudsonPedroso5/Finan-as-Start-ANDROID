@@ -1,0 +1,44 @@
+﻿[ÔêÜ] Flutter (Channel stable, 3.44.1, on Microsoft Windows [vers├åo 10.0.19045.6466], locale pt-BR) [1.847ms]
+    ÔÇó Flutter version 3.44.1 on channel stable at C:\Users\Asus\Pictures\flutter\flutter
+    ÔÇó Upstream repository https://github.com/flutter/flutter.git
+    ÔÇó Framework revision 924134a44c (2 weeks ago), 2026-05-29 12:13:22 -0400
+    ÔÇó Engine revision c416acfeb8
+    ÔÇó Dart version 3.12.1
+    ÔÇó DevTools version 2.57.0
+    ÔÇó Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-native-assets, enable-swift-package-manager, omit-legacy-version-file, enable-lldb-debugging, enable-uiscene-migration
+
+[ÔêÜ] Windows Version (10 Home Single Language 64-bit, 22H2, 2009) [7,4s]
+
+[!] Android toolchain - develop for Android devices (Android SDK version 36.1.0) [3,8s]
+    ÔÇó Android SDK at C:\Users\Asus\AppData\Local\Android\sdk
+    ÔÇó Emulator version 36.5.11.0 (build_id 15261927) (CL:N/A)
+    ÔÇó Platform android-36.1, build-tools 36.1.0
+    ÔÇó Java binary at: C:\Program Files\Android\Android Studio\jbr\bin\java
+      This is the JDK bundled with the latest Android Studio installation on this machine.
+      To manually set the JDK path, use: `flutter config --jdk-dir="path/to/jdk"`.
+    ÔÇó Java version OpenJDK Runtime Environment (build 21.0.10+-14961533-b1163.108)
+    X Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/to/windows-android-setup for more details.
+
+[ÔêÜ] Chrome - develop for the web [848ms]
+    ÔÇó Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[!] Visual Studio - develop Windows apps (Visual Studio Community 2022 17.14.25 (January 2026)) [844ms]
+    ÔÇó Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Community
+    ÔÇó Visual Studio Community 2022 version 17.14.36915.13
+    X Visual Studio is missing necessary components. Please re-run the Visual Studio installer for the "Desktop development with C++" workload, and include these components:
+        MSVC v142 - VS 2019 C++ x64/x86 build tools
+         - If there are multiple build tool versions available, install the latest
+        C++ CMake tools for Windows
+        Windows 10 SDK
+
+[ÔêÜ] Connected device (3 available) [1.236ms]
+    ÔÇó Windows (desktop) ÔÇó windows ÔÇó windows-x64    ÔÇó Microsoft Windows [vers├åo 10.0.19045.6466]
+    ÔÇó Chrome (web)      ÔÇó chrome  ÔÇó web-javascript ÔÇó Google Chrome 149.0.7827.103
+    ÔÇó Edge (web)        ÔÇó edge    ÔÇó web-javascript ÔÇó Microsoft Edge 149.0.4022.52
+
+[ÔêÜ] Network resources [1.164ms]
+    ÔÇó All expected network resources are available.
+
+! Doctor found issues in 2 categories.
