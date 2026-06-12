@@ -45,6 +45,32 @@ class Payment {
       description: description ?? this.description,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'accountId': accountId,
+      'categoryId': categoryId,
+      'amount': amount,
+      'type': type.name,
+      'datetime': datetime.toIso8601String(),
+      'title': title,
+      'description': description,
+    };
+  }
+
+  factory Payment.fromJson(Map<String, dynamic> json) {
+    return Payment(
+      id: (json['id'] as num).toInt(),
+      accountId: (json['accountId'] as num).toInt(),
+      categoryId: (json['categoryId'] as num).toInt(),
+      amount: (json['amount'] as num).toDouble(),
+      type: json['type'] == 'credit' ? PaymentType.credit : PaymentType.debit,
+      datetime: DateTime.parse(json['datetime'] as String),
+      title: json['title'] as String,
+      description: json['description'] as String,
+    );
+  }
 }
 
 class PaymentView {

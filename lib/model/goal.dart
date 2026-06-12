@@ -29,4 +29,28 @@ class Goal {
   int get daysLeft {
     return deadline.difference(DateTime.now()).inDays;
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'targetAmount': targetAmount,
+      'currentAmount': currentAmount,
+      'deadline': deadline.toIso8601String(),
+      'category': category,
+    };
+  }
+
+  factory Goal.fromJson(Map<String, dynamic> json) {
+    return Goal(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      targetAmount: (json['targetAmount'] as num).toDouble(),
+      currentAmount: (json['currentAmount'] as num).toDouble(),
+      deadline: DateTime.parse(json['deadline'] as String),
+      category: json['category'] as String,
+    );
+  }
 }

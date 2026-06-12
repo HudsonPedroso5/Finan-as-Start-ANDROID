@@ -1,14 +1,19 @@
 import 'package:fintracker/data/icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
+import 'package:fintracker/model/goal.dart';
 import 'package:fintracker/model/payment.model.dart';
+import 'package:fintracker/model/user.model.dart';
+import 'package:fintracker/services/auth_service.dart';
+import 'package:fintracker/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fintracker/model/goal.dart';
 
 class AppState {
   final String? username;
   final String? currencyCode;
+  final UserModel? user;
   final int themeColor;
   final List<Account> accounts;
   final List<Category> categories;
@@ -18,6 +23,7 @@ class AppState {
   const AppState({
     required this.username,
     required this.currencyCode,
+    required this.user,
     required this.themeColor,
     required this.accounts,
     required this.categories,
@@ -30,6 +36,7 @@ class AppState {
   AppState copyWith({
     String? username,
     String? currencyCode,
+    UserModel? user,
     int? themeColor,
     List<Account>? accounts,
     List<Category>? categories,
@@ -39,6 +46,7 @@ class AppState {
     return AppState(
       username: username ?? this.username,
       currencyCode: currencyCode ?? this.currencyCode,
+      user: user ?? this.user,
       themeColor: themeColor ?? this.themeColor,
       accounts: accounts ?? this.accounts,
       categories: categories ?? this.categories,
@@ -54,6 +62,7 @@ class AppCubit extends Cubit<AppState> {
           AppState(
             username: null,
             currencyCode: null,
+            user: null,
             themeColor: Colors.green.value,
             accounts: _seedAccounts(),
             categories: _seedCategories(),
@@ -121,6 +130,7 @@ class AppCubit extends Cubit<AppState> {
       AppState(
         username: null,
         currencyCode: null,
+        user: null,
         themeColor: Colors.green.value,
         accounts: _seedAccounts(),
         categories: _seedCategories(),
@@ -128,6 +138,50 @@ class AppCubit extends Cubit<AppState> {
         goals: const [],
       ),
     );
+  }
+
+  Future<void> syncFirebaseUser(User firebaseUser) async {
+    final existingUser = await FirestoreService.buscarUsuario(firebaseUser.uid);
+    if (existingUser != null) {
+      emit(state.copyWith(user: existingUser, username: existingUser.nome));
+      await loadCurrentUserGoals();
+      return;
+    }
+
+    final newUser = UserModel(
+      uid: firebaseUser.uid,
+      nome: firebaseUser.email?.split('@').first ?? 'Usuário',
+      email: firebaseUser.email ?? '',
+      xp: 0,
+      nivel: 1,
+      moedas: 0,
+    );
+
+    await FirestoreService.salvarUsuario(newUser);
+    emit(state.copyWith(user: newUser, username: newUser.nome));
+  }
+
+  Future<void> loadCurrentUserGoals() async {
+    final uid = state.user?.uid;
+    if (uid == null) return;
+    final goals = await FirestoreService.buscarMetas(uid);
+    emit(state.copyWith(goals: goals));
+  }
+
+  void addGoal(Goal goal) {
+    final updated = List<Goal>.from(state.goals);
+    updated.add(goal);
+
+    emit(state.copyWith(goals: updated));
+
+    if (state.user?.uid != null) {
+      FirestoreService.salvarMeta(state.user!.uid, goal);
+    }
+  }
+
+  Future<void> signOut() async {
+    await AuthService.logout();
+    resetAll();
   }
 
   Account? accountById(int id) {
@@ -363,13 +417,6 @@ class AppCubit extends Cubit<AppState> {
 
   void deletePayment(int id) {
     emit(state.copyWith(payments: state.payments.where((p) => p.id != id).toList(growable: false)));
-  }
-
-  void addGoal(Goal goal) {
-    final updated = List<Goal>.from(state.goals);
-    updated.add(goal);
-
-    emit(state.copyWith(goals: updated));
   }
 
   void addMoneyToGoal(String id, double value) {

@@ -1,5 +1,6 @@
 
 import 'package:fintracker/bloc/cubit/app_cubit.dart';
+import 'package:fintracker/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -211,7 +212,10 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 );
-                if (confirm == true) cubit.resetProfile();
+                if (confirm == true) {
+                  await AuthService.logout();
+                  cubit.resetAll();
+                }
               },
             ),
           ),

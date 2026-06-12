@@ -53,4 +53,34 @@ class Account {
       balance: balance ?? this.balance,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'holderName': holderName,
+      'accountNumber': accountNumber,
+      'iconCodePoint': iconCodePoint,
+      'colorValue': colorValue,
+      'isDefault': isDefault,
+      'income': income,
+      'expense': expense,
+      'balance': balance,
+    };
+  }
+
+  factory Account.fromJson(Map<String, dynamic> json) {
+    return Account(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      holderName: json['holderName'] as String,
+      accountNumber: json['accountNumber'] as String,
+      iconCodePoint: (json['iconCodePoint'] as num).toInt(),
+      colorValue: (json['colorValue'] as num).toInt(),
+      isDefault: json['isDefault'] as bool? ?? false,
+      income: (json['income'] as num?)?.toDouble() ?? 0,
+      expense: (json['expense'] as num?)?.toDouble() ?? 0,
+      balance: (json['balance'] as num?)?.toDouble() ?? 0,
+    );
+  }
 }
