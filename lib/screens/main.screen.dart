@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         final pages = [
           const HomeScreen(),
           const AccountsScreen(),
-          const CategoriesScreen(),
+          const GamificationScreen(),
           const SettingsScreen(),
         ];
 
