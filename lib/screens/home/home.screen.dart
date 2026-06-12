@@ -163,6 +163,35 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('🎯 Metas Ativas', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 8),
+                      Builder(builder: (context) {
+                        final goals = cubit.state.goals;
+                        if (goals.isEmpty) return const Text('Nenhuma meta ativa');
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: goals.length,
+                          itemBuilder: (_, index) {
+                            final goal = goals[index];
+                            return ListTile(
+                              leading: const Icon(Icons.flag),
+                              title: Text(goal.title),
+                              subtitle: Text('${(goal.progress * 100).toStringAsFixed(0)}%'),
+                            );
+                          },
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+              ),
           if (payments.isEmpty)
             const SliverFillRemaining(
               hasScrollBody: false,

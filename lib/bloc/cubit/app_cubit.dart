@@ -4,6 +4,7 @@ import 'package:fintracker/model/category.model.dart';
 import 'package:fintracker/model/payment.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fintracker/model/goal.dart';
 
 class AppState {
   final String? username;
@@ -12,6 +13,7 @@ class AppState {
   final List<Account> accounts;
   final List<Category> categories;
   final List<Payment> payments;
+  final List<Goal> goals;
 
   const AppState({
     required this.username,
@@ -20,6 +22,7 @@ class AppState {
     required this.accounts,
     required this.categories,
     required this.payments,
+    required this.goals,
   });
 
   bool get isConfigured => username != null && currencyCode != null;
@@ -31,6 +34,7 @@ class AppState {
     List<Account>? accounts,
     List<Category>? categories,
     List<Payment>? payments,
+    List<Goal>? goals,
   }) {
     return AppState(
       username: username ?? this.username,
@@ -39,6 +43,7 @@ class AppState {
       accounts: accounts ?? this.accounts,
       categories: categories ?? this.categories,
       payments: payments ?? this.payments,
+      goals: goals ?? this.goals,
     );
   }
 }
@@ -53,6 +58,7 @@ class AppCubit extends Cubit<AppState> {
             accounts: _seedAccounts(),
             categories: _seedCategories(),
             payments: const [],
+            goals: const [],
           ),
         );
 
@@ -105,6 +111,7 @@ class AppCubit extends Cubit<AppState> {
         accounts: _seedAccounts(),
         categories: _seedCategories(),
         payments: const [],
+        goals: const [],
       ),
     );
   }
@@ -118,6 +125,7 @@ class AppCubit extends Cubit<AppState> {
         accounts: _seedAccounts(),
         categories: _seedCategories(),
         payments: const [],
+        goals: const [],
       ),
     );
   }
@@ -355,6 +363,24 @@ class AppCubit extends Cubit<AppState> {
 
   void deletePayment(int id) {
     emit(state.copyWith(payments: state.payments.where((p) => p.id != id).toList(growable: false)));
+  }
+
+  void addGoal(Goal goal) {
+    final updated = List<Goal>.from(state.goals);
+    updated.add(goal);
+
+    emit(state.copyWith(goals: updated));
+  }
+
+  void addMoneyToGoal(String id, double value) {
+    final goals = List<Goal>.from(state.goals);
+
+    final index = goals.indexWhere((g) => g.id == id);
+    if (index == -1) return;
+
+    goals[index].currentAmount = (goals[index].currentAmount) + value;
+
+    emit(state.copyWith(goals: goals));
   }
 
   List<IconData> get iconChoices => AppIcons.icons;

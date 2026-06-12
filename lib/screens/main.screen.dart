@@ -1,5 +1,5 @@
 import 'package:fintracker/bloc/cubit/app_cubit.dart';
-import 'package:fintracker/screens/accounts/accounts.screen.dart';
+import 'package:fintracker/screens/goals/goals.screen.dart';
 import 'package:fintracker/screens/categories/categories.screen.dart';
 import 'package:fintracker/screens/home/home.screen.dart';
 import 'package:fintracker/screens/onboard/onboard_screen.dart';
@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
 
         final pages = [
           const HomeScreen(),
-          const AccountsScreen(),
+          const GoalsScreen(),
           const GamificationScreen(),
           const SettingsScreen(),
         ];
@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
             },
             destinations: const [
               NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
-              NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet), label: 'Accounts'),
+              NavigationDestination(icon: Icon(Icons.flag_outlined), selectedIcon: Icon(Icons.flag), label: 'Metas'),
               NavigationDestination(icon: Icon(Icons.category_outlined), selectedIcon: Icon(Icons.category), label: 'Categories'),
               NavigationDestination(icon: Icon(Icons.settings_outlined), selectedIcon: Icon(Icons.settings), label: 'Settings'),
             ],
